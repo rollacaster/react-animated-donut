@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { arc, pie } from 'd3-shape'
 
-class AnimatedDonut extends Component {
+class AnimatedDonut extends PureComponent {
   constructor(props) {
     super(props)
     const sum = props.data.reduce((a, b, i) => a + b.value, 0)
@@ -26,6 +26,25 @@ class AnimatedDonut extends Component {
       clearInterval(this.interval)
     }
 
+    window.requestAnimationFrame(time => {
+      this.setState(({ pathLengths }) => {
+        if (pathLengths.some(offset => offset.current > offset.end)) {
+          return {
+            pathLengths: pathLengths.map(
+              (offset, i) =>
+                offset.current > offset.end &&
+                  (i === 0 ||
+                    (pathLengths[i - 1] &&
+                      pathLengths[i - 1].current <= pathLengths[i - 1].end))
+                  ? { ...offset, current: offset.current - 5 }
+                  : offset
+            )
+          }
+        } else {
+          return this.state
+        }
+      })
+    })
     return (
       <div style={{ width: '50%' }}>
         <svg viewBox="0 0 100 100">
@@ -47,22 +66,6 @@ class AnimatedDonut extends Component {
         </svg>
       </div>
     )
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState(({ pathLengths }) => ({
-        pathLengths: pathLengths.map(
-          (offset, i) =>
-            offset.current > offset.end &&
-              (i === 0 ||
-                (pathLengths[i - 1] &&
-                  pathLengths[i - 1].current <= pathLengths[i - 1].end))
-              ? { ...offset, current: offset.current - 1 }
-              : offset
-        )
-      }))
-    }, 5)
   }
 }
 
