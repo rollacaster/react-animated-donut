@@ -15,5 +15,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build": "babel ./src/AnimatedDonut.js -o ./build/lib/animated-donut.js"
-  }
+  },
+  "repository": "https://github.com/rollacaster/react-animated-donut",
+  "license": "MIT"
 }
