@@ -38,7 +38,9 @@ class AnimatedDonut extends PureComponent {
                     offset.current > offset.end &&
                       (i === 0 ||
                         pathLengths[i - 1].current <= pathLengths[i - 1].end)
-                      ? { ...offset, current: offset.current - speed }
+                      ? Object.assign({}, offset, {
+                          current: offset.current - speed
+                        })
                       : offset
                 )
               }
