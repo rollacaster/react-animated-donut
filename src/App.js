@@ -47,25 +47,23 @@ class AnimatedDonut extends PureComponent {
     })
 
     return (
-      <div style={{ width: '50%' }}>
-        <svg viewBox="0 0 100 100">
-          <g transform="translate(50, 50)">
-            {arcs.map((arc, i) => (
-              <path
-                key={i}
-                d={drawArc(arc)}
-                style={{
-                  stroke: arc.data.color,
-                  strokeWidth: width,
-                  strokeDasharray: pathLengths[i].end * 2,
-                  strokeDashoffset: pathLengths[i].current
-                }}
-              />
-            ))}
-            {children}
-          </g>
-        </svg>
-      </div>
+      <svg viewBox="0 0 100 100">
+        <g transform="translate(50, 50)">
+          {arcs.map((arc, i) => (
+            <path
+              key={i}
+              d={drawArc(arc)}
+              style={{
+                stroke: arc.data.color,
+                strokeWidth: width,
+                strokeDasharray: pathLengths[i].end * 2,
+                strokeDashoffset: pathLengths[i].current
+              }}
+            />
+          ))}
+          {children}
+        </g>
+      </svg>
     )
   }
 }
