@@ -2,6 +2,8 @@
 
 Animated Donut Chart using react &amp; d3
 
+![img](./demo.gif)
+
 
 ## Usage
 
