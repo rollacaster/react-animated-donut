@@ -1,6 +1,6 @@
 {
   "name": "react-animated-donut",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "dependencies": {
     "d3-shape": "^1.2.0",
     "react": "^15.6.1",
@@ -8,16 +8,18 @@
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
-    "react-scripts": "1.0.7"
+    "babel-loader": "^7.1.0",
+    "react-scripts": "1.0.7",
+    "webpack": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build": "babel ./src/AnimatedDonut.js -o ./build/lib/index.js",
-    "prepublish": "build"
+    "prepare": "npm run build"
   },
   "repository": "https://github.com/rollacaster/react-animated-donut",
   "license": "MIT",
-  "main": "lib"
+  "main": "build/lib"
 }
