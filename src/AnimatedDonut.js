@@ -4,16 +4,15 @@ import { arc, pie } from 'd3-shape'
 const radius = 45
 
 class AnimatedDonut extends PureComponent {
-  constructor(props) {
-    super(props)
-    const sum = props.data.reduce((a, b, i) => a + b.value, 0)
+  componentWillMount() {
+    const sum = this.props.data.reduce((a, b, i) => a + b.value, 0)
 
-    this.state = {
-      pathLengths: props.data.map(({ value }) => ({
+    this.setState({
+      pathLengths: this.props.data.map(({ value }) => ({
         current: value / sum * radius * Math.PI * 2 * 2,
         end: value / sum * radius * Math.PI * 2
       }))
-    }
+    })
   }
 
   render() {
